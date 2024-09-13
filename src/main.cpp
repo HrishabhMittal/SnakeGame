@@ -5,18 +5,18 @@ int main() {
     //also make cursor invisible bcoz it looks annoying
     system("clear");
     enableEscapeSequences();
-    cout << CURSOR_INVISIBLE;
+    std::cout << CURSOR_INVISIBLE;
     no_echo();
 
     //game loop
     Game g(20);
     while (!g.isGameOver()) {
         g.render();
-        this_thread::sleep_for(1000ms/FPS);
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000)/FPS);
     }
 
     //reset changes made earlier
     echo();
-    cout << CURSOR_VISIBLE;
+    std::cout << CURSOR_VISIBLE;
     system("clear");
 }

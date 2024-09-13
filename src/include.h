@@ -8,16 +8,16 @@
 
 // only for this_thread::sleepfor
 #include <thread>
+#include <chrono>
 
 //made sure that code works on cmd powershell and bash
 //by default virtual terminal processing is disbled in powershell and cmd
 //(not when you open them in vscode)
 //enabled on bash by default
-using namespace std;
 #if __has_include(<windows.h>)
 #include <windows.h>
 #include <conio.h>
-int enableEscapeSquences() {
+int enableEscapeSequences() {
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     if (hOut == INVALID_HANDLE_VALUE) return GetLastError();
     DWORD dwMode = 0;

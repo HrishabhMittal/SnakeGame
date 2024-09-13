@@ -1,12 +1,12 @@
 #include "ansi.h"
 int randint(int a,int b) {
-    random_device rd;
-    uniform_int_distribution<int> x(a,b);
+    std::random_device rd;
+    std::uniform_int_distribution<int> x(a,b);
     return x(rd);
 }
 // handles everything about the game
 class Game {
-    vector<vector<int>> board;
+    std::vector<std::vector<int>> board;
     int length=5;
     int dirn=0;
     int size;
@@ -29,9 +29,9 @@ class Game {
     void input() {
         //pretty straightforward
         if (kbhit()) {
-            char x=getchar();
             //handling arrow keys
-            #ifdef WINDOWS_H 
+            #ifdef _WINDOWS_
+            char x=_getch();
             // on cmd 
             // arrow keys give 0 <keycode>
             // on powershell
@@ -50,10 +50,9 @@ class Game {
                     x='s'; break;
                 case 77:
                     x='d'; break;
-                default:
-                    x=0; break;
             }
             #else
+            char x=getchar();
             // on bash
             // arrow keys give 
             // 27(ESC) 91([) then
@@ -144,10 +143,10 @@ class Game {
         // better for performance to store the entire thing in a string first
         // than to make so many cout calls
         // although due to low frame rate this doesnt matter here
-        string out="\033[HSNAKE GAME              Score:"+to_string(length-5)+'\n';
-        string prevcol=RESET_COLOR;
-        string apple=brgb(250,0,0);
-        string snake=brgb(0,250,0);
+        std::string out="\033[HSNAKE GAME              Score:"+std::to_string(length-5)+'\n';
+        std::string prevcol=RESET_COLOR;
+        std::string apple=brgb(250,0,0);
+        std::string snake=brgb(0,250,0);
         for (int i=0;i<size;i++) {
             for (int j=0;j<size;j++) {
                 if (board[i][j]==-1) {
@@ -173,12 +172,12 @@ class Game {
         }
         out.pop_back();
         out+=RESET_COLOR;
-        cout << out;
+        std::cout << out;
     }
 public:
     Game(int s) {
         size=s;
-        board=vector(size,vector(size,0));
+        board=std::vector(size,std::vector(size,0));
         board[size/2][size/2]=length;
         genApple();
     }
