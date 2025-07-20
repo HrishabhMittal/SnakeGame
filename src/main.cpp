@@ -1,10 +1,9 @@
 #include "snake.cpp"
-#define FPS 4
+#include <iostream>
+#define FPS 10
 int main() {
-    //disable keyboard input from showing up on the screen
-    //also make cursor invisible bcoz it looks annoying
-    system("clear");
     enableEscapeSequences();
+    std::cout<<"\033[H\033[2J";
     std::cout << CURSOR_INVISIBLE;
     no_echo();
 
@@ -18,5 +17,5 @@ int main() {
     //reset changes made earlier
     echo();
     std::cout << CURSOR_VISIBLE;
-    system("clear");
+    std::cout<<"\033[H\033[2J";
 }
