@@ -1,10 +1,10 @@
+#pragma once
 #include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
 #include <fcntl.h>
-// this function is "borrowed" from
-// https://cboard.cprogramming.com/c-programming/63166-kbhit-linux-post449446.html
-int kbhit(void) {
+
+inline int kbhit(void) {
   struct termios oldt, newt;
   int ch;
   int oldf;
